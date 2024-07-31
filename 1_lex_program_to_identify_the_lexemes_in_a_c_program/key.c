@@ -1,0 +1,16 @@
+int
+void
+main
+char
+if
+for
+while
+else
+printf
+scanf
+FILE
+Include
+Stdio.h
+Conio.h
+getch
+iostream
