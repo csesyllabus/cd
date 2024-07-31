@@ -1,5 +1,4 @@
 %{
-int COMMENT = 0;
 %}
 
 identifier [a-z A-Z][a-z A-Z 0-9]*
@@ -10,18 +9,12 @@ identifier [a-z A-Z][a-z A-Z 0-9]*
 int|float|main|if|else|printf|scanf|for|char|getch|while {
     printf("\n%s is a Keyword", yytext);
 }
-"/*" { COMMENT = 1; }
-"*/" { COMMENT = 0; }
-{identifier}\( { if (!COMMENT) printf("\nFunction:\t%s", yytext); }
-\{ { if (!COMMENT) printf("\nBlock Begins"); }
-\} { if (!COMMENT) printf("\nBlock Ends"); }
-{identifier}(\[[0-9]*\])? { if (!COMMENT) printf("\n%s is an Identifier", yytext); }
-\".*\" { if (!COMMENT) printf("\n%s is a String", yytext); }
-[0-9]+ { if (!COMMENT) printf("\n%s is a Number", yytext); }
-\)(\;)? { if (!COMMENT) { printf("\t"); ECHO; printf("\n"); } }
-\( ECHO;
-= { if (!COMMENT) printf("\n%s is an Assignment Operator", yytext); }
-\<=|\>=|\<|== { if (!COMMENT) printf("\n%s is a Relational Operator", yytext); }
+
+{identifier}\( {printf("\nFunction:\t%s", yytext); }
+\{ {printf("\nBlock Begins"); }
+\} {printf("\nBlock Ends"); }
+{identifier} {printf("\n%s is an Identifier", yytext); }
+
 .|\n
 
 %%
